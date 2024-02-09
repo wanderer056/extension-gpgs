@@ -198,13 +198,14 @@ public class GpgsJNI {
         }
     }
 
-    public GpgsJNI(Activity activity, boolean is_disk_active, boolean is_request_auth_code, boolean is_request_id_token, boolean is_request_email, String client_id) {
+    public GpgsJNI(Activity activity, boolean is_disk_active, boolean is_request_auth_code, boolean is_request_id_token, boolean is_request_email, boolean is_request_profile, String client_id) {
         this.activity = activity;
         this.is_disk_active = is_disk_active;
         this.client_id = client_id;
         this.is_request_auth_code = is_request_auth_code;
         this.is_request_id_token = is_request_id_token;
         this.is_request_email = is_request_email;
+        this.is_request_profile = is_request_profile;
 
         this.is_supported = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(activity) == ConnectionResult.SUCCESS;
 
@@ -257,8 +258,11 @@ public class GpgsJNI {
             if (is_request_email) {
                 builder.requestEmail();
             }
-            
-            builder.requestProfile();
+
+            if (is_request_profile)
+            {
+                builder.requestProfile();
+            }
 
             mSignInOptions = builder.build();
         }
@@ -347,6 +351,10 @@ public class GpgsJNI {
 
     public String getEmail() {
         return isLoggedIn() ? mSignedInAccount.getEmail() : null;
+    }
+
+    public String getProfile() {
+        return isLoggedIn() ? mSignedInAccount.getProfile() : null;
     }
 
     public String getIdToken() {

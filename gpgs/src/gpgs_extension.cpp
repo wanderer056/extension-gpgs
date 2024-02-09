@@ -25,10 +25,11 @@ struct GPGS
     jmethodID               m_getId;
     jmethodID               m_getIdToken;
     jmethodID               m_getServerAuthCode;
+    jmethodID               m_getEmail;
+    jmethodID               m_getProfile;
     jmethodID               m_isLoggedIn;
     jmethodID               m_setGravityForPopups;
     jmethodID               m_isSupported;
-    jmethodID               m_getEmail;
 };
 
 struct GPGS_Disk
@@ -885,6 +886,7 @@ static void InitJNIMethods(JNIEnv* env, jclass cls)
     g_gpgs.m_getIdToken = env->GetMethodID(cls, "getIdToken", "()Ljava/lang/String;");
     g_gpgs.m_getServerAuthCode = env->GetMethodID(cls, "getServerAuthCode", "()Ljava/lang/String;");
     g_gpgs.m_getEmail = env->GetMethodID(cls,"getEmail","()Ljava/lang/String;");
+    g_gpgs.m_getProfile = env->GetMethodID(cls,"getProfile","()Ljava/lang/String;");
     g_gpgs.m_setGravityForPopups = env->GetMethodID(cls, "setGravityForPopups", "(I)V");
 
     //disk
@@ -942,7 +944,7 @@ static void CheckInitializationParams(const char* client_id, bool request_server
 }
 
 
-static void InitializeJNI(const char* client_id, bool request_server_auth_code, bool request_id_token, bool request_email)
+static void InitializeJNI(const char* client_id, bool request_server_auth_code, bool request_id_token, bool request_email, bool request_profile)
 {
     CheckInitializationParams(client_id, request_server_auth_code > 0, request_id_token > 0);
 
@@ -952,11 +954,11 @@ static void InitializeJNI(const char* client_id, bool request_server_auth_code, 
 
     InitJNIMethods(env, cls);
 
-    jmethodID jni_constructor = env->GetMethodID(cls, "<init>", "(Landroid/app/Activity;ZZZZLjava/lang/String;)V");
+    jmethodID jni_constructor = env->GetMethodID(cls, "<init>", "(Landroid/app/Activity;ZZZZZLjava/lang/String;)V");
     jstring java_client_id = env->NewStringUTF(client_id);
 
     g_gpgs.m_GpgsJNI = env->NewGlobalRef(env->NewObject(cls, jni_constructor, threadAttacher.GetActivity()->clazz,
-                                g_gpgs_disk.is_using, request_server_auth_code, request_id_token, request_email, java_client_id));
+                                g_gpgs_disk.is_using, request_server_auth_code, request_id_token, request_email, request_profile, java_client_id));
 
     env->DeleteLocalRef(java_client_id);
 }
@@ -971,11 +973,11 @@ static dmExtension::Result InitializeGpgs(dmExtension::Params* params)
     int request_server_auth_code = dmConfigFile::GetInt(params->m_ConfigFile, "gpgs.request_server_auth_code", 0);
     int request_id_token = dmConfigFile::GetInt(params->m_ConfigFile, "gpgs.request_id_token", 0);
     int request_email = dmConfigFile::GetInt(params->m_ConfigFile, "gpgs.request_email", 0);
-    dmLogInfo("Request Email: ", request_email)
+    int request_profile = dmConfigFile::GetInt(params->m_ConfigFile, "gpgs.request_profile", 0);
 
     const char* client_id = dmConfigFile::GetString(params->m_ConfigFile, "gpgs.client_id", 0);
 
-    InitializeJNI(client_id, request_server_auth_code > 0, request_id_token > 0, request_email > 0);
+    InitializeJNI(client_id, request_server_auth_code > 0, request_id_token > 0, request_email > 0, request_profile > 0);
     dmAndroid::RegisterOnActivityResultListener(OnActivityResult);
     gpgs_callback_initialize();
     return dmExtension::RESULT_OK;
