@@ -28,6 +28,7 @@ struct GPGS
     jmethodID               m_isLoggedIn;
     jmethodID               m_setGravityForPopups;
     jmethodID               m_isSupported;
+    jmethodID               m_getEmail;
 };
 
 struct GPGS_Disk
