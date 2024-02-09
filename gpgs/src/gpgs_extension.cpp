@@ -884,6 +884,7 @@ static void InitJNIMethods(JNIEnv* env, jclass cls)
     g_gpgs.m_getId = env->GetMethodID(cls, "getId", "()Ljava/lang/String;");
     g_gpgs.m_getIdToken = env->GetMethodID(cls, "getIdToken", "()Ljava/lang/String;");
     g_gpgs.m_getServerAuthCode = env->GetMethodID(cls, "getServerAuthCode", "()Ljava/lang/String;");
+    g_gpgs.m_getEmail = env->GetMethodID(cls,"getEmail","()Ljava/lang/String;")
     g_gpgs.m_setGravityForPopups = env->GetMethodID(cls, "setGravityForPopups", "(I)V");
 
     //disk
