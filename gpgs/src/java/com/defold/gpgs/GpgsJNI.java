@@ -355,7 +355,8 @@ public class GpgsJNI {
     }
 
     public String getProfile() {
-        return isLoggedIn() ? mSignedInAccount.getProfile() : null;
+        // return isLoggedIn() ? mSignedInAccount.getProfile() : null;
+        return "Test Name"
     }
 
     public String getIdToken() {
