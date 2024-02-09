@@ -102,6 +102,7 @@ public class GpgsJNI {
     private boolean is_request_id_token;
     private boolean is_request_auth_code;
     private boolean is_request_email;
+    private boolean is_request_profile;
     private boolean is_supported;
 
     //--------------------------------------------------
