@@ -302,6 +302,11 @@ static int GpgsAuth_getId(lua_State* L)
     return CallStringMethod(L, g_gpgs.m_GpgsJNI, g_gpgs.m_getId);
 }
 
+static int GpgsAuth_getEmail(lua_State* L)
+{
+    return CallStringMethod(L, g_gpgs.m_GpgsJNI,g_gpgs.m_getEmail);
+}
+
 static int GpgsAuth_getIdToken(lua_State* L)
 {
     return CallStringMethod(L, g_gpgs.m_GpgsJNI, g_gpgs.m_getIdToken);
