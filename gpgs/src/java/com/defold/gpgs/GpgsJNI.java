@@ -356,17 +356,22 @@ public class GpgsJNI {
 
     public String getProfile() {
         if(isLoggedIn()) {
-            JSONObject profile = new JSONObject();
+            try {
+                JSONObject profile = new JSONObject();
 
-            profile.put("name",mSignedInAccount.getDisplayName());
-            profile.put("given_name",mSignedInAccount.getGivenName());
-            profile.put("family_name",mSignedInAccount.getFamilyName());
-            profile.put("url",mSignedInAccount.getPhotoUrl());
-            profile.put("id",mSignedInAccount.getId());
+                profile.put("name",mSignedInAccount.getDisplayName());
+                profile.put("given_name",mSignedInAccount.getGivenName());
+                profile.put("family_name",mSignedInAccount.getFamilyName());
+                profile.put("url",mSignedInAccount.getPhotoUrl());
+                profile.put("id",mSignedInAccount.getId());
+                
+                String profileText = profile.toString();
+    
+                return profileText;
+            } catch (JSONException e) {
+                message = "{ \"error\": \"Error while converting profile info to JSON: " + e.getMessage() + "\" }";
+            }
             
-            String profileText = profile.toString();
-
-            return profileText;
         }
 
         return null;
