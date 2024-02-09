@@ -952,7 +952,7 @@ static void InitializeJNI(const char* client_id, bool request_server_auth_code, 
 
     InitJNIMethods(env, cls);
 
-    jmethodID jni_constructor = env->GetMethodID(cls, "<init>", "(Landroid/app/Activity;ZZZLjava/lang/String;)V");
+    jmethodID jni_constructor = env->GetMethodID(cls, "<init>", "(Landroid/app/Activity;ZZZZLjava/lang/String;)V");
     jstring java_client_id = env->NewStringUTF(client_id);
 
     g_gpgs.m_GpgsJNI = env->NewGlobalRef(env->NewObject(cls, jni_constructor, threadAttacher.GetActivity()->clazz,
