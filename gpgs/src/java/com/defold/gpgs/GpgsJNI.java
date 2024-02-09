@@ -362,7 +362,7 @@ public class GpgsJNI {
                 profile.put("name",mSignedInAccount.getDisplayName());
                 profile.put("given_name",mSignedInAccount.getGivenName());
                 profile.put("family_name",mSignedInAccount.getFamilyName());
-                profile.put("url",mSignedInAccount.getPhotoUrl());
+                profile.put("photo_url",mSignedInAccount.getPhotoUrl());
                 profile.put("id",mSignedInAccount.getId());
                 
                 String profileText = profile.toString();
