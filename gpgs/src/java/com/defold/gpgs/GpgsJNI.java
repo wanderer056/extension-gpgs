@@ -355,7 +355,6 @@ public class GpgsJNI {
     }
 
     public String getProfile() {
-        // return isLoggedIn() ? mSignedInAccount.jfile() : null;
         if(isLoggedIn()) {
             JSONObject profile = new JSONObject();
 
@@ -363,18 +362,14 @@ public class GpgsJNI {
             profile.put("given_name",mSignedInAccount.getGivenName());
             profile.put("family_name",mSignedInAccount.getFamilyName());
             profile.put("url",mSignedInAccount.getPhotoUrl());
-
-            StringWriter out = new StringWriter();
-            profile.writeJSONString(out);
+            profile.put("id",mSignedInAccount.getId());
             
-            String profileText = out.toString();
+            String profileText = profile.toString();
 
             return profileText;
-
         }
 
         return null;
-        
         
     }
 
