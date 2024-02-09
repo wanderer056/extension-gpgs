@@ -355,8 +355,27 @@ public class GpgsJNI {
     }
 
     public String getProfile() {
-        // return isLoggedIn() ? mSignedInAccount.getProfile() : null;
-        return "Test Name";
+        // return isLoggedIn() ? mSignedInAccount.jfile() : null;
+        if(isLoggedIn()) {
+            JSONObject profile = new JSONObject();
+
+            profile.put("name",mSignedInAccount.getDisplayName());
+            profile.put("given_name",mSignedInAccount.getGivenName());
+            profile.put("family_name",mSignedInAccount.getFamilyName());
+            profile.put("url",mSignedInAccount.getPhotoUrl());
+
+            StringWriter out = new StringWriter();
+            profile.writeJSONString(out);
+            
+            String profileText = out.toString();
+
+            return profileText;
+
+        }
+
+        return null;
+        
+        
     }
 
     public String getIdToken() {
