@@ -763,6 +763,7 @@ static const luaL_reg Gpgs_methods[] =
     {"get_id", GpgsAuth_getId},
     {"get_id_token", GpgsAuth_getIdToken},
     {"get_server_auth_code", GpgsAuth_getServerAuthCode},
+    {"get_email", GpgsAuth_getEmail}
     {"is_logged_in", GpgsAuth_isLoggedIn},
     {"set_popup_position", GpgsAuth_setGravityForPopups},
     {"set_callback", Gpg_set_callback},
