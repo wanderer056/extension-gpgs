@@ -369,7 +369,7 @@ public class GpgsJNI {
     
                 return profileText;
             } catch (JSONException e) {
-                message = "{ \"error\": \"Error while converting profile info to JSON: " + e.getMessage() + "\" }";
+               String message = "{ \"error\": \"Error while converting profile info to JSON: " + e.getMessage() + "\" }";
             }
             
         }
