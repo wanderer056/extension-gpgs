@@ -926,7 +926,7 @@ static void InitJNIMethods(JNIEnv* env, jclass cls)
 }
 
 
-static void CheckInitializationParams(const char* client_id, bool request_server_auth_code, bool request_id_token, bool request_email)
+static void CheckInitializationParams(const char* client_id, bool request_server_auth_code, bool request_id_token)
 {
     bool is_empty_client_id = client_id == 0 || strlen(client_id) == 0;
 
