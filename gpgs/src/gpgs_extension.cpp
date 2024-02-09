@@ -971,6 +971,7 @@ static dmExtension::Result InitializeGpgs(dmExtension::Params* params)
     int request_server_auth_code = dmConfigFile::GetInt(params->m_ConfigFile, "gpgs.request_server_auth_code", 0);
     int request_id_token = dmConfigFile::GetInt(params->m_ConfigFile, "gpgs.request_id_token", 0);
     int request_email = dmConfigFile::GetInt(params->m_ConfigFile, "gpgs.request_email", 0);
+    dmLogInfo("Request Email: ", request_email)
 
     const char* client_id = dmConfigFile::GetString(params->m_ConfigFile, "gpgs.client_id", 0);
 
