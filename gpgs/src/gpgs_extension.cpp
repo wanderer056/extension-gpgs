@@ -942,7 +942,7 @@ static void CheckInitializationParams(const char* client_id, bool request_server
 }
 
 
-static void InitializeJNI(const char* client_id, bool request_server_auth_code, bool request_id_token)
+static void InitializeJNI(const char* client_id, bool request_server_auth_code, bool request_id_token, bool request_email)
 {
     CheckInitializationParams(client_id, request_server_auth_code > 0, request_id_token > 0, request_email > 0);
 
