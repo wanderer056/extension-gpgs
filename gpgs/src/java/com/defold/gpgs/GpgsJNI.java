@@ -252,8 +252,8 @@ public class GpgsJNI {
                 builder.requestServerAuthCode(client_id);
             }
 
-            builder.requestEmail()
-            builder.requestProfile()
+            builder.requestEmail();
+            builder.requestProfile();
 
             mSignInOptions = builder.build();
         }
@@ -341,7 +341,7 @@ public class GpgsJNI {
     }
 
     public String getEmail() {
-        return isLoggedIn() ? mPlayer.getEmail() : null;
+        return isLoggedIn() ? mSignedInAccount.getEmail() : null;
     }
 
     public String getIdToken() {
